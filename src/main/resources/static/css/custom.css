@@ -1,0 +1,4 @@
+
+/* minimal custom styling; rely on bootstrap mostly */
+body { background: #f8f9fa; }
+.card { border-radius: 12px; }

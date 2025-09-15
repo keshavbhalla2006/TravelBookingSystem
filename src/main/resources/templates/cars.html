@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="fragments/header :: *">
+<h2>Available Cars</h2>
+<div th:each="c : ${cars}">
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 th:text="${c.provider} + ' — ' + ${c.carModel}"></h5>
+            <p th:text="'Pickup: ' + ${c.pickupLocation} + ' → Drop: ' + ${c.dropLocation}"></p>
+            <p>Price per unit: ₹<span th:text="${c.pricePerKm}"></span></p>
+            <a class="btn btn-sm btn-outline-primary" th:href="@{/cars/{id}(id=${c.id})}">Details</a>
+        </div>
+    </div>
+</div>
+<div th:replace="fragments/footer :: *"></div>
+</html>

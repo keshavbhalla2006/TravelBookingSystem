@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Train Details - Travel Booking</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-4">
+    <h2 th:text="${train.operator} + ' - ' + ${train.origin} + ' → ' + ${train.destination}"></h2>
+    <p>
+        Train Number: <b th:text="${train.trainNumber}"></b><br/>
+        Departure: <span th:text="${#dates.format(train.departureTime, 'dd MMM yyyy HH:mm')}"></span><br/>
+        Arrival: <span th:text="${#dates.format(train.arrivalTime, 'dd MMM yyyy HH:mm')}"></span><br/>
+        Seats Available: <b th:text="${train.seats}"></b><br/>
+        Price per Seat: $<b th:text="${train.price}"></b>
+    </p>
+
+    <form th:action="@{'/booking/train/' + ${train.id}}" method="post">
+        <div class="mb-3">
+            <label>Seats to Book</label>
+            <input type="number" class="form-control" name="seats" min="1" th:max="${train.seats}" value="1"/>
+        </div>
+        <button class="btn btn-primary">Book Now</button>
+    </form>
+
+    <div th:if="${error}" class="alert alert-danger mt-2" th:text="${error}"></div>
+</div>
+</body>
+</html>

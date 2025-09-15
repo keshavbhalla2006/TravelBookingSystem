@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Car Details - Travel Booking</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-4">
+    <h2 th:text="${car.name} + ' - ' + ${car.type}"></h2>
+    <p>
+        Available Units: <b th:text="${car.availableUnits}"></b><br/>
+        Price per km: $<b th:text="${car.pricePerKm}"></b>
+    </p>
+
+    <form th:action="@{'/booking/car/' + ${car.id}}" method="post">
+        <div class="mb-3">
+            <label>Units to Book</label>
+            <input type="number" class="form-control" name="units" min="1" th:max="${car.availableUnits}" value="1"/>
+        </div>
+        <button class="btn btn-primary">Book Car</button>
+    </form>
+
+    <div th:if="${error}" class="alert alert-danger mt-2" th:text="${error}"></div>
+</div>
+</body>
+</html>

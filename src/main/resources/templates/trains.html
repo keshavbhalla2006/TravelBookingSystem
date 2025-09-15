@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="fragments/header :: *">
+<h2>Available Trains</h2>
+<div th:each="t : ${trains}">
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 th:text="${t.operator} + ' — ' + ${t.origin} + ' → ' + ${t.destination}"></h5>
+            <p>Departure: <span th:text="${#temporals.format(t.departureTime,'dd MMM yyyy HH:mm')}"></span></p>
+            <p>Price: ₹<span th:text="${t.price}"></span></p>
+            <a class="btn btn-sm btn-outline-primary" th:href="@{/trains/{id}(id=${t.id})}">Details</a>
+        </div>
+    </div>
+</div>
+<div th:replace="fragments/footer :: *"></div>

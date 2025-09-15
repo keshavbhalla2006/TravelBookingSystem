@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="fragments/header :: *">
+<h2>Available Flights</h2>
+<div th:each="f : ${flights}">
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 th:text="${f.airline} + ' — ' + ${f.origin} + ' → ' + ${f.destination}"></h5>
+            <p>Departure: <span th:text="${#temporals.format(f.departureTime, 'dd MMM yyyy HH:mm')}"></span></p>
+            <p>Price: ₹<span th:text="${f.price}"></span></p>
+            <a class="btn btn-sm btn-outline-primary" th:href="@{/flights/{id}(id=${f.id})}">Details</a>
+        </div>
+    </div>
+</div>
+<div th:replace="fragments/footer :: *"></div>
+</html>
